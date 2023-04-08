@@ -36,6 +36,16 @@ class Triple:
     def __repr__(self):
         return f"Triple({self.subject}, {self.predicate}, {self.object})"
 
+class ResultSet:
+    def __init__(self, json_result) -> None:
+        self.json_result = json_result
+    
+    def names(self):
+        return self.json_result['head']['vars']
+
+    def rows(self):
+        return list(map(parse_result_row, self.json_result['results']['bindings']))
+
 def parse_resource(resource):
     type = resource["type"]
     if type == "uri":
@@ -44,21 +54,20 @@ def parse_resource(resource):
         return Literal(resource["value"])
     raise Exception("type: {type}")
         
+def parse_result_row(row: dict):
+    result = {}
+    for n in row.keys():
+        result[n] = parse_resource(row[n])
+    return result
 
-def query(query: str) -> list[Triple]:
+def query(query: str) -> ResultSet:
     query = database_prefix + query
     sparql = SPARQLWrapper(database_url)
     sparql.setReturnFormat(JSON)
     sparql.setQuery(query)
 
-    result = []
     ret = sparql.query().convert()
-    for r in ret["results"]["bindings"]:
-        subject = parse_resource(r["subject"])
-        predicate = parse_resource(r["predicate"])
-        object = parse_resource(r["object"])
-        t = Triple(subject, predicate, object)
-        result.append(t)
+    result = ResultSet(ret)
     return result
 
 def update(query: str) -> dict[str, str]:
@@ -68,16 +77,8 @@ def update(query: str) -> dict[str, str]:
     sparql.setMethod(POST)
     sparql.setHTTPAuth(DIGEST)
     sparql.setQuery(query)
-    result = sparql.query().convert()
+    query = sparql.query()
+    result = query.convert()
     if result["statusCode"] != 200:
         raise Exception(result["message"])
     return result
-
-tripletes = update("""
-
-INSERT DATA {
-    :maks :name "Maksim"
-}
-""")
-
-print(tripletes)
