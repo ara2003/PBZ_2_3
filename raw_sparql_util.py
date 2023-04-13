@@ -17,6 +17,9 @@ class Node(Resource):
     def __init__(self, uri: str):
         self.uri = uri
 
+    def __str__(self):
+        return f"<{self.uri}>"
+
     def __repr__(self):
         return f"Node({self.uri})"
 
@@ -24,6 +27,9 @@ class Literal(Resource):
     def __init__(self, value: str):
         self.value = value
 
+    def __str__(self):
+        return f'"{self.value}"'
+    
     def __repr__(self):
         return f"Literal({self.value})"
 
