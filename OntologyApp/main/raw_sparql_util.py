@@ -18,7 +18,7 @@ class Node(Resource):
         self.uri = uri
 
     def __str__(self):
-        return f"<{self.uri}>"
+        return f"{self.uri}"
 
     def __repr__(self):
         return f"Node({self.uri})"
@@ -55,7 +55,7 @@ class ResultSet:
 def parse_resource(resource):
     type = resource["type"]
     if type == "uri":
-        return Node(resource["value"])
+        return Node('<'+resource["value"]+'>')
     if type == "literal":
         return Literal(resource["value"])
     raise Exception("type: {type}")
