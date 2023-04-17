@@ -51,22 +51,19 @@ def getSubjectOfProperty(object, property):
     newObjectProperty(property)
     return list(map(lambda x: x["subject"], get_triple(None, property, object).rows()))
 
-classA = Node(":classA")
-classB = Node(":classB")
+def getAllInstances():
+    return list(map(lambda x: x["x"], query("""
+SELECT * WHERE {
+    ?cls rdf:type owl:Class.
+    ?x rdf:type ?cls.
+}    
+""").rows()))
 
-obj = Node(":obj")
+# classA = Node(":classA")
+# classB = Node(":classB")
+# obj = Node(":obj")
+# delete_all_triple()
+# addClass(obj, classA)
+# print(getAllInstances())
 
-delete_all_triple()
-
-addSuperClass(classA, classB)
-
-print(getSubClasses(classB))
-print(getSubClasses(classA))
-print(getSuperClasses(classB))
-print(getSuperClasses(classA))
-
-res = get_all_triple()
-print(res.names())
-for row in res.rows():
-    print(row)
 
