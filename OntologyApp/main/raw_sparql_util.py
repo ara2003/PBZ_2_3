@@ -1,5 +1,5 @@
-
 from SPARQLWrapper import *
+
 
 database_url="http://localhost:3030/test"
 database_prefix ="""

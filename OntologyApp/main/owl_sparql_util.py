@@ -1,7 +1,7 @@
-
-from sparql_util import *
+from .sparql_util import *
 
 from functools import *
+
 
 rdfType = Node("rdf:type")
 owlClass = Node("owl:Class")
@@ -53,11 +53,11 @@ def getSubjectOfProperty(object, property):
 
 def getAllInstances():
     return list(map(lambda x: x["x"], query("""
-SELECT * WHERE {
-    ?cls rdf:type owl:Class.
-    ?x rdf:type ?cls.
-}    
-""").rows()))
+        SELECT * WHERE {
+            ?cls rdf:type owl:Class.
+            ?x rdf:type ?cls.
+        }    
+    """).rows()))
 
 # classA = Node(":classA")
 # classB = Node(":classB")

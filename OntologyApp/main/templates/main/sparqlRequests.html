@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+SPARQL Requests
+{% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ context.form.body }}<br>
+    <button type="submit" class="btn btn-success" name="Submit">Request</button>
+    <span>{{ context.error }}</span>
+</form>
+
+</br>
+
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+            {% for el in variables %}
+            <th scope="col">{{ el }}</th>
+            {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+            {% for el in query %}
+            <tr>
+                {% for key, value in el.items %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Ontology
+{% endblock %}
+
+
+{% block content %}
+
+<div class="btn-group">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Add Class
+  </button>
+  <ul class="dropdown-menu">
+    <li><input placeholder="Enter text" class="form-control" type="text" id="fname" name="fname"></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Add Instance
+  </button>
+  <ul class="dropdown-menu">
+    <li><input placeholder="Enter text" class="form-control" type="text" id="fname" name="fname"></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Add Object Property
+  </button>
+  <ul class="dropdown-menu">
+    <li><input placeholder="Enter text" class="form-control" type="text" id="fname" name="fname"></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+</br></br>
+
+<div class="accordion" id="accordionExample">
+  {% for el in context.classes %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ forloop.counter0 }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter0 }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter0 }}">
+        {{ el.0 }}
+      </button>
+    </h2>
+    <div id="collapse{{ forloop.counter0 }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter0 }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Super Classes</strong></br>
+        {{ el.1 }}</br>
+        <strong>Subclasses</strong></br>
+        {{ el.2 }}</br>
+        <strong>Instances</strong></br>
+        <strong>Object Properties</strong></br>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
