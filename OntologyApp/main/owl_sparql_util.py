@@ -59,6 +59,10 @@ def getAllInstances():
         }    
     """).rows()))
 
+def getInstancesOFClass(cls):
+    newClass(cls)
+    return list(map(lambda x: x["object"], get_triple(None, rdfType, cls).rows()))
+
 # classA = Node(":classA")
 # classB = Node(":classB")
 # obj = Node(":obj")
