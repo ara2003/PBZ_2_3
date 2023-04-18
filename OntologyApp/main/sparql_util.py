@@ -32,7 +32,4 @@ def get_tripleRequest(sparqlRequest):
 
 
 def get_dict_triple(triplesRaw):
-    triples = []
-    for row in triplesRaw.rows():
-        triples.append(row)
-    return triples
+    return triplesRaw.rows()

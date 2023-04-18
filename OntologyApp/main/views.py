@@ -91,7 +91,6 @@ def sparqlRequests(request):
         else:
             error = 'Incorrect form!'
 
-    form = SPARQLRequestForm()
     context = {
         'form': form,
         'variables': variables,
