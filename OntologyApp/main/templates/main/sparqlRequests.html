@@ -8,7 +8,7 @@ SPARQL Requests
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ context.form.body }}<br>
+    {{ form.body }}<br>
     <button type="submit" class="btn btn-success" name="Submit">Request</button>
     <span>{{ context.error }}</span>
 </form>
@@ -19,15 +19,15 @@ SPARQL Requests
     <table class="table table-hover table-sm">
       <thead>
         <tr>
-            {% for el in variables %}
-            <th scope="col">{{ el }}</th>
+            {% for name in result.names %}
+              <th scope="col">{{ name }}</th>
             {% endfor %}
         </tr>
       </thead>
       <tbody>
-            {% for el in query %}
+            {% for row in result.rows %}
             <tr>
-                {% for key, value in el.items %}
+                {% for key, value in row.items %}
                     <td>{{ value }}</td>
                 {% endfor %}
             </tr>

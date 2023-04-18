@@ -43,12 +43,12 @@ class Triple:
         return f"Triple({self.subject}, {self.predicate}, {self.object})"
 
 class ResultSet:
-    def __init__(self, json_result) -> None:
+    def __init__(self, json_result = {'head':{'vars':[]}, 'results':{ 'bindings': [] }}) -> None:
         self.json_result = json_result
     
     def names(self):
         return self.json_result['head']['vars']
-
+    
     def rows(self):
         return list(map(parse_result_row, self.json_result['results']['bindings']))
 
