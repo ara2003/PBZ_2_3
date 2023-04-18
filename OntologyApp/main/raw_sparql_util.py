@@ -58,7 +58,9 @@ def parse_resource(resource):
         return Node('<'+resource["value"]+'>')
     if type == "literal":
         return Literal(resource["value"])
-    raise Exception("type: {type}")
+    if type == "bnode":
+        return Node(resource["value"])
+    raise Exception(f"type: {resource}")
         
 def parse_result_row(row: dict):
     result = {}

@@ -18,10 +18,10 @@ def getClasses(object):
     return list(map(lambda x: x["object"], get_triple(object, rdfType, None).rows()))
 
 def getSubClasses(cls):
-    return list(map(lambda x: x["object"], get_triple(cls, rdfsSubClassOf, None).rows()))
+    return list(map(lambda x: x["subject"], get_triple(None, rdfsSubClassOf, cls).rows()))
 
 def getSuperClasses(cls):
-    return list(map(lambda x: x["subject"], get_triple(None, rdfsSubClassOf, cls).rows()))
+    return list(map(lambda x: x["object"], get_triple(cls, rdfsSubClassOf, None).rows()))
 
 def addClass(object, cls):
     newClass(cls)
@@ -76,5 +76,3 @@ def delete(obj):
 # delete_all_triple()
 # addClass(obj, classA)
 # print(getAllInstances())
-
-
