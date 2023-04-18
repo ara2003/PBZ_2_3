@@ -6,8 +6,8 @@ Triples
 
 {% block content %}
 
-<div class="table-responsive">
-    <table class="table table-striped table-sm">
+<div>
+    <table class="table table-hover table-sm">
       <thead>
         <tr>
           <th scope="col">Subject</th>
@@ -21,6 +21,7 @@ Triples
           <td>{{ el.subject }}</td>
           <td>{{ el.predicate }}</td>
           <td>{{ el.object }}</td>
+          <td><button type="submit" class="btn btn-danger float-end" name="Delete">Delete</button></td>
         </tr>
         {% endfor %}
       </tbody>

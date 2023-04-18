@@ -84,7 +84,6 @@ Ontology
       <li><a class="dropdown-item" href="#">Edit</a></li>
     </ul>
   </div>
-
 </div>
 
 </br></br>
@@ -99,12 +98,27 @@ Ontology
     </h2>
     <div id="collapse{{ forloop.counter0 }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter0 }}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>Super Classes</strong></br>
-        {{ el.1 }}</br>
-        <strong>Subclasses</strong></br>
-        {{ el.2 }}</br>
-        <strong>Instances</strong></br>
-        <strong>Object Properties</strong></br>
+        <div class="table-responsive">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Super Classes</th>
+                <th scope="col">Subclasses</th>
+                <th scope="col">Instance</th>
+                <th scope="col">Object Properties</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ el.0 }}</td>
+                <td>{{ el.1 }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-danger float-end" name="Delete">Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
