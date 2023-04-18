@@ -17,7 +17,24 @@ Object Properties
         {% for el in context.objectProperties %}
         <tr>
           <td>{{ el }}</td>
-          <td><button type="submit" class="btn btn-danger float-end" name="Delete">Delete</button></td>
+          <td>
+            <div class="btn-group float-end">
+              <form method='post'>
+                {% csrf_token %}
+                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Edit Object Property
+                </button>
+                <ul class="dropdown-menu">
+                  <li><input placeholder="Enter new name" class="form-control" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li></br>
+                  <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyEditOne" name="objectPropertyEditOne"></li></br>
+                  <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyEditTwo" name="objectPropertyEditTwo"></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li> 
+                </ul>
+                <button type="submit" class="btn btn-danger" name="Delete" value="{{ el }}">Delete</button>
+              </form>
+            </div>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

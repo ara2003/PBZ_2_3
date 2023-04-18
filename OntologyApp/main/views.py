@@ -16,6 +16,31 @@ def ontology(request):
         superClasses.append(getSuperClasses(i))
 
     classes = list(zip(classes, superClasses, subClasses))
+    
+    if request.method == 'POST':
+
+        if 'addClass' in request.POST:
+            name = request.POST.get('classInputName')
+            superClass = request.POST.get('classInputOne')
+            subClass = request.POST.get('classInputTwo')
+        
+        if 'addInstance' in request.POST:
+            name = request.POST.get('individualInputName')
+            superClass = request.POST.get('individualInput')
+
+        if 'addObjectProperty' in request.POST:
+            name = request.POST.get('objectPropertyInputName')
+            subject = request.POST.get('objectPropertyInputOne')
+            object = request.POST.get('objectPropertyInputTwo')
+
+        if 'Edit' in request.POST:
+            editedClass = request.POST.get('Edit')
+            newName = request.POST.get('classEditOne')
+            subClass = request.POST.get('classEditTwo')
+        
+        if 'Delete' in request.POST:
+            delClass = request.POST.get('Delete')
+
 
     context = {
         'classes': classes,
@@ -26,6 +51,17 @@ def ontology(request):
 def instances(request):
     instances = getAllInstances()
 
+    if request.method == 'POST':
+
+        if 'Edit' in request.POST:
+            editedInstance = request.POST.get('Edit')
+            newName = request.POST.get('individualEditNewName')
+            superClass = request.POST.get('individualEditInput')
+            
+        if 'Delete' in request.POST:
+            delInstance = request.POST.get('Delete')
+
+
     context = {
         'instances': instances,
     }
@@ -34,6 +70,18 @@ def instances(request):
 
 def objectProperties(request):
     objectProperties = getAllObjectProperty()
+
+    if request.method == 'POST':
+
+        if 'Edit' in request.POST:
+            editedObjectProperty = request.POST.get('Edit')
+            newName = request.POST.get('objectPropertyEditNewName')
+            subject = request.POST.get('objectPropertyEditOne')
+            object = request.POST.get('objectPropertyEditTwo')
+            
+        if 'Delete' in request.POST:
+            delObjectProperty = request.POST.get('Delete')
+
 
     context = {
         'objectProperties': objectProperties,
@@ -45,9 +93,14 @@ def triplesRDF(request):
     triplesRaw = get_all_triple()
     triples = get_dict_triple(triplesRaw)
 
+    if request.method == 'POST':
+        
+        if 'Delete' in request.POST:
+            delTriples = request.POST.get('Delete')
+
     context = {
         'triples' : triples,
-     }
+    }
     return render(request, 'main/triplesRDF.html', {'context': context})
 
 
@@ -69,6 +122,7 @@ def sparqlRequests(request):
         else:
             error = 'Incorrect form!'
 
+    form = SPARQLRequestForm()
     context = {
         'form': form,
         'result': result,

@@ -17,7 +17,23 @@ Instances
         {% for el in context.instances %}
         <tr>
           <td>{{ el }}</td>
-          <td><button type="submit" class="btn btn-danger float-end" name="Delete">Delete</button></td>
+          <td>
+            <div class="btn-group float-end">
+              <form method='post'>
+                {% csrf_token %}
+                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Edit Instance
+                </button>
+                <ul class="dropdown-menu">
+                  <li><input placeholder="Enter new name" class="form-control" type="text" id="individualEditNewName" name="individualEditNewName"></li></br>
+                  <li><input placeholder="Enter parent" class="form-control" type="text" id="individualEditInput" name="individualEditInput"></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li>
+                </ul>
+                <button type="submit" class="btn btn-danger" name="Delete" value="{{ el }}">Delete</button>
+              </form>
+            </div>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

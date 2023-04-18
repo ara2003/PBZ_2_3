@@ -12,24 +12,14 @@ Ontology
       Add Class
     </button>
     <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="classInputName" name="classInputName"></li></br>
-      <li><input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></li></br>
-      <li><input placeholder="Enter Subclasses" class="form-control" type="text" id="classInputTwo" name="classInputTwo"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Add</a></li>
-    </ul>
-  </div>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Edit Class
-    </button>
-    <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="classEditName" name="classEditName"></li></br>
-      <li><input placeholder="Enter new name" class="form-control" type="text" id="classInputOne" name="classEditOne"></li></br>
-      <li><input placeholder="Enter Subclasses" class="form-control" type="text" id="classInputTwo" name="classEditTwo"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Edit</a></li>
+      <form method='post'>
+        {% csrf_token %}
+        <li><input placeholder="Enter name" class="form-control" type="text" id="classInputName" name="classInputName"></li></br>
+        <li><input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></li></br>
+        <li><input placeholder="Enter Subclasses" class="form-control" type="text" id="classInputTwo" name="classInputTwo"></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><button type="submit" class="dropdown-item" name="addClass">Add</button></li>
+      </form>
     </ul>
   </div>
 
@@ -38,23 +28,13 @@ Ontology
       Add Instance
     </button>
     <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="individualInputName" name="individualInputName"></li></br>
-      <li><input placeholder="Enter parent" class="form-control" type="text" id="individualInput" name="individualInput"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Add</a></li>
-    </ul>
-  </div>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Edit Instance
-    </button>
-    <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="individualEditName" name="individualEditName"></li></br>
-      <li><input placeholder="Enter new name" class="form-control" type="text" id="individualEditNewName" name="individualEditNewName"></li></br>
-      <li><input placeholder="Enter parent" class="form-control" type="text" id="individualEditInput" name="individualEditInput"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Edit</a></li>
+      <form method='post'>
+        {% csrf_token %}
+        <li><input placeholder="Enter name" class="form-control" type="text" id="individualInputName" name="individualInputName"></li></br>
+        <li><input placeholder="Enter parent" class="form-control" type="text" id="individualInput" name="individualInput"></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><button type="submit" class="dropdown-item" name="addInstance">Add</button></li>
+      </form>
     </ul>
   </div>
 
@@ -63,25 +43,14 @@ Ontology
       Add Object Property
     </button>
     <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></li></br>
-      <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></li></br>
-      <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Add</a></li>
-    </ul>
-  </div>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Edit Object Property
-    </button>
-    <ul class="dropdown-menu">
-      <li><input placeholder="Enter name" class="form-control" type="text" id="objectPropertyEditName" name="objectPropertyEditName"></li></br>
-      <li><input placeholder="Enter new name" class="form-control" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li></br>
-      <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyEditOne" name="objectPropertyEditOne"></li></br>
-      <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyEditTwo" name="objectPropertyEditTwo"></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Edit</a></li>
+      <form method='post'>
+        {% csrf_token %}
+        <li><input placeholder="Enter name" class="form-control" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></li></br>
+        <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></li></br>
+        <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo"></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><button type="submit" class="dropdown-item" name="addObjectProperty">Add</button></li>
+      </form>
     </ul>
   </div>
 </div>
@@ -115,9 +84,19 @@ Ontology
               </tr>
             </tbody>
           </table>
-          <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-danger float-end" name="Delete">Delete</button>
-          </div>
+          
+          <form method='post'>
+            {% csrf_token %}
+            <div class="input-group">
+              <input placeholder="Enter new name" class="form-control" type="text" id="classEditOne" name="classEditOne">
+              <input placeholder="Enter Subclasses" class="form-control" type="text" id="classEditTwo" name="classEditTwo">
+              <button type="button" class="btn btn-warning float-end" name="Edit" value="{{ el.0 }}">Edit</button>
+              <button type="submit" class="btn btn-danger float-end" name="Delete" value="{{ el.0 }}">Delete</button>
+            </div>
+          </form>
+
+          </br>
+
         </div>
       </div>
     </div>
