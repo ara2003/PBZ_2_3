@@ -6,6 +6,12 @@ SPARQL Requests
 
 {% block content %}
 
+<script>
+  var c = document.getElementById('Requests')
+  console.log(c)
+  c.classList.add('active')
+</script>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.body }}<br>
