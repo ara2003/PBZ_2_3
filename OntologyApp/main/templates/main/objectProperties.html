@@ -6,6 +6,12 @@ Object Properties
 
 {% block content %}
 
+<script>
+  var c = document.getElementById('Object Properties')
+  console.log(c)
+  c.classList.add('active')
+</script>
+
 <div class="table-responsive">
     <table class="table table-hover table-sm">
       <thead>
@@ -21,15 +27,15 @@ Object Properties
             <div class="btn-group float-end">
               <form method='post'>
                 {% csrf_token %}
+                <input placeholder="Enter new name" class="form-control" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName">
                 <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Edit Object Property
+                  New Property
                 </button>
                 <ul class="dropdown-menu">
-                  <li><input placeholder="Enter new name" class="form-control" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li></br>
-                  <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyEditOne" name="objectPropertyEditOne"></li></br>
+                  <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyEditOne" name="objectPropertyEditOne"></li>
                   <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyEditTwo" name="objectPropertyEditTwo"></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li> 
+                  <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Add</button></li> 
                 </ul>
                 <button type="submit" class="btn btn-danger" name="Delete" value="{{ el }}">Delete</button>
               </form>

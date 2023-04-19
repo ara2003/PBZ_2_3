@@ -23,7 +23,7 @@ def ontology(request):
             name = request.POST.get('classInputName')
             superClass = request.POST.get('classInputOne')
             subClass = request.POST.get('classInputTwo')
-        
+
         if 'addInstance' in request.POST:
             name = request.POST.get('individualInputName')
             superClass = request.POST.get('individualInput')
