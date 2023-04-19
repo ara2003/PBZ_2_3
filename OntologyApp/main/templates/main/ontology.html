@@ -63,6 +63,7 @@ Ontology
 
 </br></br>
 
+{% if context.classes %}
 <div class="accordion" id="accordionExample">
   {% for el in context.classes %}
   <div class="accordion-item">
@@ -127,5 +128,19 @@ Ontology
   </div>
   {% endfor %}
 </div>
+{% else %}
+
+  <style>
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10%;
+    }
+  </style>
+
+  <img src="https://media.tenor.com/ywIY7WlJRLwAAAAi/yes-please-sir-waiting.gif" alt="Yes Please Sir Waiting Sticker" width="173" height="173" />
+  <p style="text-align: center;">No classes. Please add some...</p>
+{% endif %}
 
 {% endblock %}

@@ -23,7 +23,7 @@ def ontology(request):
             name = request.POST.get('classInputName')
             superClass = request.POST.get('classInputOne')
             subClass = request.POST.get('classInputTwo')
-
+        
         if 'addInstance' in request.POST:
             name = request.POST.get('individualInputName')
             superClass = request.POST.get('individualInput')
@@ -113,6 +113,7 @@ def sparqlRequests(request):
 
         if form.is_valid():
             sparqlRequest = form.data['body']
+
             if 'SELECT' in sparqlRequest:
                 result = query(sparqlRequest)
             elif 'INSERT' in sparqlRequest or 'DELETE' in sparqlRequest:

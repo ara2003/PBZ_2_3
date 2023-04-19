@@ -1,14 +1,8 @@
-from .models import SPARQLRequest
-from django.forms import ModelForm, Textarea
+from django import forms
+from django.forms.widgets import Textarea
 
 
-class SPARQLRequestForm(ModelForm):
-    class Meta:
-        model = SPARQLRequest
-        fields = ["body"]
-        widgets = {
-            "body": Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter SPARQL Request'
-            }),
-        }
+class SPARQLRequestForm(forms.Form):
+    body = forms.CharField(widget=Textarea(
+        attrs={'class':'form-control', 'placeholder': 'Enter SPARQL request'}
+    ))
