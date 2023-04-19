@@ -15,8 +15,6 @@ Ontology
       <form method='post'>
         {% csrf_token %}
         <li><input placeholder="Enter name" class="form-control" type="text" id="classInputName" name="classInputName"></li></br>
-        <li><input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></li></br>
-        <li><input placeholder="Enter Subclasses" class="form-control" type="text" id="classInputTwo" name="classInputTwo"></li>
         <li><hr class="dropdown-divider"></li>
         <li><button type="submit" class="dropdown-item" name="addClass">Add</button></li>
       </form>
@@ -31,7 +29,7 @@ Ontology
       <form method='post'>
         {% csrf_token %}
         <li><input placeholder="Enter name" class="form-control" type="text" id="individualInputName" name="individualInputName"></li></br>
-        <li><input placeholder="Enter parent" class="form-control" type="text" id="individualInput" name="individualInput"></li>
+        <li><input placeholder="Enter class" class="form-control" type="text" id="individualInput" name="individualInput"></li>
         <li><hr class="dropdown-divider"></li>
         <li><button type="submit" class="dropdown-item" name="addInstance">Add</button></li>
       </form>
@@ -87,12 +85,30 @@ Ontology
           
           <form method='post'>
             {% csrf_token %}
+
+            <div class="input-group">
+              <input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></br>
+              <button type="submit" class="btn btn-success float-end" name="addSuperClass">Add</button>
+            </div>
+
+            </br>
+
+            <div class="input-group">
+              <input placeholder="Enter Subclass" class="form-control" type="text" id="classInputTwo" name="classInputTwo">
+              <button type="submit" class="btn btn-success float-end" name="addSubClass">Add</button>
+            </div>
+
+            </br>
+
             <div class="input-group">
               <input placeholder="Enter new name" class="form-control" type="text" id="classEditOne" name="classEditOne">
-              <input placeholder="Enter Subclasses" class="form-control" type="text" id="classEditTwo" name="classEditTwo">
               <button type="button" class="btn btn-warning float-end" name="Edit" value="{{ el.0 }}">Edit</button>
-              <button type="submit" class="btn btn-danger float-end" name="Delete" value="{{ el.0 }}">Delete</button>
             </div>
+            
+            </br>
+
+            <button type="submit" class="btn btn-danger btn-sm float-end" name="Delete" value="{{ el.0 }}">Delete</button>
+
           </form>
 
           </br>
