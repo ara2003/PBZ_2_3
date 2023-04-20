@@ -5,6 +5,34 @@ from .owl_sparql_util import *
 # Create your views here.
 
 def ontology(request):
+    
+    if request.method == 'POST':
+
+        if 'addClass' in request.POST:
+            name = request.POST.get('classInputName')
+
+            classCreate = Node(":" + name)
+            obj = Node(":obj")
+            addClass(obj, classCreate)
+        
+        if 'addInstance' in request.POST:
+            name = request.POST.get('individualInputName')
+            superClass = request.POST.get('individualInput')
+
+        if 'addObjectProperty' in request.POST:
+            name = request.POST.get('objectPropertyInputName')
+            subject = request.POST.get('objectPropertyInputOne')
+            object = request.POST.get('objectPropertyInputTwo')
+
+
+        if 'Edit' in request.POST:
+            editedClass = request.POST.get('Edit')
+            newName = request.POST.get('classEditOne')
+            subClass = request.POST.get('classEditTwo')
+        
+        if 'Delete' in request.POST:
+            delClass = request.POST.get('Delete')
+
     classes = getAllClasses()
 
     subClasses = []
@@ -16,31 +44,6 @@ def ontology(request):
         superClasses.append(getSuperClasses(i))
 
     classes = list(zip(classes, superClasses, subClasses))
-    
-    if request.method == 'POST':
-
-        if 'addClass' in request.POST:
-            name = request.POST.get('classInputName')
-            superClass = request.POST.get('classInputOne')
-            subClass = request.POST.get('classInputTwo')
-        
-        if 'addInstance' in request.POST:
-            name = request.POST.get('individualInputName')
-            superClass = request.POST.get('individualInput')
-
-        if 'addObjectProperty' in request.POST:
-            name = request.POST.get('objectPropertyInputName')
-            subject = request.POST.get('objectPropertyInputOne')
-            object = request.POST.get('objectPropertyInputTwo')
-
-        if 'Edit' in request.POST:
-            editedClass = request.POST.get('Edit')
-            newName = request.POST.get('classEditOne')
-            subClass = request.POST.get('classEditTwo')
-        
-        if 'Delete' in request.POST:
-            delClass = request.POST.get('Delete')
-
 
     context = {
         'classes': classes,
