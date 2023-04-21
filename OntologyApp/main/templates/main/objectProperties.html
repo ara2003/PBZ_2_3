@@ -12,6 +12,19 @@ Object Properties
   c.classList.add('active')
 </script>
 
+<style>
+  @media (max-width: 767px) {
+    .table-responsive .dropdown-menu {
+        position: static !important;
+    }
+  }
+  @media (min-width: 768px) {
+      .table-responsive {
+          overflow: visible;
+      }
+  }
+</style>
+
 <div class="table-responsive">
     <table class="table table-hover table-sm">
       <thead>
@@ -31,7 +44,7 @@ Object Properties
                   Edit Property
                 </button>
                 <ul class="dropdown-menu">
-                  <li><input placeholder="Enter new name" class="form-control" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li>
+                  <li><input placeholder="Enter new name" class="form-control dropdown-item" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li> 
                 </ul>

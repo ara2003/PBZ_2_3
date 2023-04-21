@@ -22,7 +22,7 @@ Ontology
     <ul class="dropdown-menu">
       <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control" type="text" id="classInputName" name="classInputName"></li></br>
+        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="classInputName" name="classInputName"></li>
         <li><hr class="dropdown-divider"></li>
         <li><button type="submit" class="dropdown-item" name="addClass">Add</button></li>
       </form>
@@ -36,8 +36,8 @@ Ontology
     <ul class="dropdown-menu">
       <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control" type="text" id="individualInputName" name="individualInputName"></li></br>
-        <li><input placeholder="Enter class" class="form-control" type="text" id="individualInput" name="individualInput"></li>
+        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="individualInputName" name="individualInputName"></li></br>
+        <li><input placeholder="Enter class" class="form-control dropdown-item" type="text" id="individualInput" name="individualInput"></li>
         <li><hr class="dropdown-divider"></li>
         <li><button type="submit" class="dropdown-item" name="addInstance">Add</button></li>
       </form>
@@ -51,9 +51,9 @@ Ontology
     <ul class="dropdown-menu">
       <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></li></br>
-        <li><input placeholder="Enter subject" class="form-control" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></li></br>
-        <li><input placeholder="Enter object" class="form-control" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo"></li>
+        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></li></br>
+        <li><input placeholder="Enter subject" class="form-control dropdown-item" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></li></br>
+        <li><input placeholder="Enter object" class="form-control dropdown-item" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo"></li>
         <li><hr class="dropdown-divider"></li>
         <li><button type="submit" class="dropdown-item" name="addObjectProperty">Add</button></li>
       </form>

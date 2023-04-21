@@ -12,6 +12,19 @@ Instances
   c.classList.add('active')
 </script>
 
+<style>
+  @media (max-width: 767px) {
+    .table-responsive .dropdown-menu {
+        position: static !important;
+    }
+  }
+  @media (min-width: 768px) {
+      .table-responsive {
+          overflow: visible;
+      }
+  }
+</style>
+
 <div class="table-responsive">
     <table class="table table-hover table-sm">
       <thead>
@@ -27,11 +40,11 @@ Instances
             <div class="btn-group float-end">
               <form method='post'>
                 {% csrf_token %}
-                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Edit Instance
                 </button>
-                <ul class="dropdown-menu">
-                  <li><input placeholder="Enter new name" class="form-control" type="text" id="individualEditNewName" name="individualEditNewName"></li>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><input placeholder="Enter new name" class="form-control dropdown-item" type="text" id="individualEditNewName" name="individualEditNewName"></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li>
                 </ul>
