@@ -1,11 +1,12 @@
 from django.shortcuts import render
+
 from .forms import SPARQLRequestForm
 from .owl_sparql_util import *
+
 
 # Create your views here.
 
 def ontology(request):
-    
     if request.method == 'POST':
 
         if 'addClass' in request.POST:
@@ -13,25 +14,25 @@ def ontology(request):
 
             classNode = Node(":" + name)
             newClass(classNode)
-        
+
         if 'addInstance' in request.POST:
             name = request.POST.get('individualInputName')
             cls = request.POST.get('individualInput')
 
             instNode = Node(":" + name)
             classNode = Node(":" + cls)
-            
+
             addClass(instNode, classNode)
 
         if 'addObjectProperty' in request.POST:
             name = request.POST.get('objectPropertyInputName')
             subject = request.POST.get('objectPropertyInputOne')
             object = request.POST.get('objectPropertyInputTwo')
-            
+
             nameNode = Node(":" + name)
             subjectNode = Node(":" + subject)
             objectNode = Node(":" + object)
-            
+            newObjectProperty(nameNode)
             create_triple(subjectNode, nameNode, objectNode)
 
         if 'Edit' in request.POST:
@@ -55,7 +56,7 @@ def ontology(request):
             classInputNode = Node(":" + classInput)
 
             addSuperClass(classInputNode, editedClassNode)
-        
+
         if 'Delete' in request.POST:
             className = request.POST.get('Delete')
 
@@ -68,11 +69,11 @@ def ontology(request):
     subClasses = []
     for i in classes:
         subClasses.append(getSubClasses(i))
-    
+
     superClasses = []
     for i in classes:
         superClasses.append(getSuperClasses(i))
-    
+
     instances = []
     for i in classes:
         instances.append(getInstancesOfClass(i))
@@ -94,10 +95,9 @@ def instances(request):
             editedInstance = request.POST.get('Edit')
             newName = request.POST.get('individualEditNewName')
             superClass = request.POST.get('individualEditInput')
-            
+
         if 'Delete' in request.POST:
             delInstance = request.POST.get('Delete')
-
 
     context = {
         'instances': instances,
@@ -115,10 +115,9 @@ def objectProperties(request):
             newName = request.POST.get('objectPropertyEditNewName')
             subject = request.POST.get('objectPropertyEditOne')
             object = request.POST.get('objectPropertyEditTwo')
-            
+
         if 'Delete' in request.POST:
             delObjectProperty = request.POST.get('Delete')
-
 
     context = {
         'objectProperties': objectProperties,
@@ -127,11 +126,8 @@ def objectProperties(request):
 
 
 def triplesRDF(request):
-    triplesRaw = get_all_triple()
-    triples = get_dict_triple(triplesRaw)
-
     if request.method == 'POST':
-        
+
         if 'Delete' in request.POST:
             delTriples: str = request.POST.get('Delete')
 
@@ -139,13 +135,15 @@ def triplesRDF(request):
             index2 = delTriples.find(' ', index1 + 1)
 
             subjectNode = Node(delTriples[:index1])
-            predicateNode = Node(delTriples[index1+1:index2])
-            objectNode = Node(delTriples[index2+1:])
+            predicateNode = Node(delTriples[index1 + 1:index2])
+            objectNode = Node(delTriples[index2 + 1:])
 
             delete_triple(subjectNode, predicateNode, objectNode)
 
+    triplesRaw = get_all_triple()
+    triples = get_dict_triple(triplesRaw)
     context = {
-        'triples' : triples,
+        'triples': triples,
     }
     return render(request, 'main/triplesRDF.html', {'context': context})
 
