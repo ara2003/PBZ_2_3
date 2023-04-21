@@ -28,8 +28,9 @@ Triples
           <td>{{ el.predicate }}</td>
           <td>{{ el.object }}</td>
           <td>
-            <form method="pos">
+            <form method="post">
               {% csrf_token %}
+              
               <button type="submit" class="btn btn-danger float-end" name="Delete" value="{{ el.subject }} {{ el.predicate }} {{ el.object }}">Delete</button>
             </form>
           </td>

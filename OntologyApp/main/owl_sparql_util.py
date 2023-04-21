@@ -61,14 +61,15 @@ def getAllInstances():
 
 def getInstancesOfClass(cls):
     newClass(cls)
-    return list(map(lambda x: x["object"], get_triple(None, rdfType, cls).rows()))
+    return list(map(lambda x: x["subject"], get_triple(None, rdfType, cls).rows()))
 
 def delete(obj):
     update("DELETE { ?x ?r " + obj.__str__() + ". } WHERE { ?x ?r " + obj.__str__() + ". }")
     update("DELETE { " + obj.__str__() + " ?r ?x. } WHERE { " + obj.__str__() + " ?r ?x. }")
     update("DELETE { ?x " + obj.__str__() + "  ?y. } WHERE { ?x " + obj.__str__() + " ?y. }")
 
-
+def rename(obj, newObj):
+    return update('DELETE {')
 
 # classA = Node(":classA")
 # classB = Node(":classB")

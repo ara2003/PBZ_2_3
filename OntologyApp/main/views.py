@@ -11,27 +11,57 @@ def ontology(request):
         if 'addClass' in request.POST:
             name = request.POST.get('classInputName')
 
-            classCreate = Node(":" + name)
-            obj = Node(":obj")
-            addClass(obj, classCreate)
+            classNode = Node(":" + name)
+            newClass(classNode)
         
         if 'addInstance' in request.POST:
             name = request.POST.get('individualInputName')
-            superClass = request.POST.get('individualInput')
+            cls = request.POST.get('individualInput')
+
+            instNode = Node(":" + name)
+            classNode = Node(":" + cls)
+            
+            addClass(instNode, classNode)
 
         if 'addObjectProperty' in request.POST:
             name = request.POST.get('objectPropertyInputName')
             subject = request.POST.get('objectPropertyInputOne')
             object = request.POST.get('objectPropertyInputTwo')
-
+            
+            nameNode = Node(":" + name)
+            subjectNode = Node(":" + subject)
+            objectNode = Node(":" + object)
+            
+            create_triple(subjectNode, nameNode, objectNode)
 
         if 'Edit' in request.POST:
             editedClass = request.POST.get('Edit')
-            newName = request.POST.get('classEditOne')
-            subClass = request.POST.get('classEditTwo')
+            classEditOne = request.POST.get('classEditOne')
+
+        if 'addSuperClass' in request.POST:
+            editedClass = request.POST.get('addSuperClass')
+            classInputOne = request.POST.get('classInputOne')
+
+            editedClassNode = Node(editedClass)
+            classInputNode = Node(":" + classInputOne)
+
+            addSuperClass(editedClassNode, classInputNode)
+
+        if 'addSubClass' in request.POST:
+            editedClass = request.POST.get('addSubClass')
+            classInput = request.POST.get('classInputTwo')
+
+            editedClassNode = Node(editedClass)
+            classInputNode = Node(":" + classInput)
+
+            addSuperClass(classInputNode, editedClassNode)
         
         if 'Delete' in request.POST:
-            delClass = request.POST.get('Delete')
+            className = request.POST.get('Delete')
+
+            classNode = Node(className)
+
+            delete(classNode)
 
     classes = getAllClasses()
 
@@ -42,8 +72,12 @@ def ontology(request):
     superClasses = []
     for i in classes:
         superClasses.append(getSuperClasses(i))
+    
+    instances = []
+    for i in classes:
+        instances.append(getInstancesOfClass(i))
 
-    classes = list(zip(classes, superClasses, subClasses))
+    classes = list(zip(classes, superClasses, subClasses, instances))
 
     context = {
         'classes': classes,
@@ -99,7 +133,16 @@ def triplesRDF(request):
     if request.method == 'POST':
         
         if 'Delete' in request.POST:
-            delTriples = request.POST.get('Delete')
+            delTriples: str = request.POST.get('Delete')
+
+            index1 = delTriples.find(' ')
+            index2 = delTriples.find(' ', index1 + 1)
+
+            subjectNode = Node(delTriples[:index1])
+            predicateNode = Node(delTriples[index1+1:index2])
+            objectNode = Node(delTriples[index2+1:])
+
+            delete_triple(subjectNode, predicateNode, objectNode)
 
     context = {
         'triples' : triples,

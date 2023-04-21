@@ -79,16 +79,42 @@ Ontology
             <thead>
               <tr>
                 <th scope="col">Super Classes</th>
-                <th scope="col">Subclasses</th>
-                <th scope="col">Instance</th>
-                <th scope="col">Object Properties</th>
               </tr>
             </thead>
             <tbody>
+              {% for i in el.1 %}
               <tr>
-                <td>{{ el.1 }}</td>
-                <td>{{ el.2 }}</td>
+                <td>{{ i }}</td>
               </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Subclasses</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in el.2 %}
+              <tr>
+                <td>{{ i }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Instance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in el.3 %}
+              <tr>
+                <td>{{ i }}</td>
+              </tr>
+              {% endfor %}
             </tbody>
           </table>
           
@@ -97,14 +123,14 @@ Ontology
 
             <div class="input-group">
               <input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></br>
-              <button type="submit" class="btn btn-success float-end" name="addSuperClass">Add</button>
+              <button type="submit" class="btn btn-success float-end" name="addSuperClass" value="{{ el.0 }}">Add</button>
             </div>
 
             </br>
 
             <div class="input-group">
               <input placeholder="Enter Subclass" class="form-control" type="text" id="classInputTwo" name="classInputTwo">
-              <button type="submit" class="btn btn-success float-end" name="addSubClass">Add</button>
+              <button type="submit" class="btn btn-success float-end" name="addSubClass" value="{{ el.0 }}">Add</button>
             </div>
 
             </br>
