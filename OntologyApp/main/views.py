@@ -88,7 +88,6 @@ def ontology(request):
 
 
 def instances(request):
-    instances = getAllInstances()
 
     if request.method == 'POST':
 
@@ -103,6 +102,8 @@ def instances(request):
 
             delete(delInstance)
 
+    instances = getAllInstances()
+
     context = {
         'instances': instances,
     }
@@ -110,7 +111,6 @@ def instances(request):
 
 
 def objectProperties(request):
-    objectProperties = getAllObjectProperty()
 
     if request.method == 'POST':
 
@@ -124,6 +124,8 @@ def objectProperties(request):
             delObjectProperty = Node(request.POST.get('Delete'))
 
             delete(delObjectProperty)
+    
+    objectProperties = getAllObjectProperty()
 
     context = {
         'objectProperties': objectProperties,
