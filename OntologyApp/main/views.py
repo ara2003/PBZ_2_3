@@ -10,17 +10,16 @@ def ontology(request):
     if request.method == 'POST':
 
         if 'addClass' in request.POST:
-            name = request.POST.get('classInputName')
+            name = Node(request.POST.get('classInputName'))
 
-            classNode = Node(":" + name)
-            newClass(classNode)
+            newClass(name)
 
         if 'addInstance' in request.POST:
             name = request.POST.get('individualInputName')
             cls = request.POST.get('individualInput')
 
-            instNode = Node(":" + name)
-            classNode = Node(":" + cls)
+            instNode = Node(name)
+            classNode = Node(cls)
 
             addClass(instNode, classNode)
 
@@ -29,22 +28,24 @@ def ontology(request):
             subject = request.POST.get('objectPropertyInputOne')
             object = request.POST.get('objectPropertyInputTwo')
 
-            nameNode = Node(":" + name)
-            subjectNode = Node(":" + subject)
-            objectNode = Node(":" + object)
+            nameNode = Node(name)
+            subjectNode = Node(subject)
+            objectNode = Node(object)
             newObjectProperty(nameNode)
             create_triple(subjectNode, nameNode, objectNode)
 
         if 'Edit' in request.POST:
-            editedClass = request.POST.get('Edit')
-            classEditOne = request.POST.get('classEditOne')
+            cls = Node(request.POST.get('Edit'))
+            newName = Node(request.POST.get('newName'))
+
+            rename(cls, newName)
 
         if 'addSuperClass' in request.POST:
             editedClass = request.POST.get('addSuperClass')
             classInputOne = request.POST.get('classInputOne')
 
             editedClassNode = Node(editedClass)
-            classInputNode = Node(":" + classInputOne)
+            classInputNode = Node(classInputOne)
 
             addSuperClass(editedClassNode, classInputNode)
 
@@ -53,7 +54,7 @@ def ontology(request):
             classInput = request.POST.get('classInputTwo')
 
             editedClassNode = Node(editedClass)
-            classInputNode = Node(":" + classInput)
+            classInputNode = Node(classInput)
 
             addSuperClass(classInputNode, editedClassNode)
 
@@ -92,12 +93,15 @@ def instances(request):
     if request.method == 'POST':
 
         if 'Edit' in request.POST:
-            editedInstance = request.POST.get('Edit')
-            newName = request.POST.get('individualEditNewName')
-            superClass = request.POST.get('individualEditInput')
+            editedInstance = Node(request.POST.get('Edit'))
+            newName = Node(request.POST.get('individualEditNewName'))
+
+            rename(editedInstance, newName)
 
         if 'Delete' in request.POST:
-            delInstance = request.POST.get('Delete')
+            delInstance = Node(request.POST.get('Delete'))
+
+            delete(delInstance)
 
     context = {
         'instances': instances,
@@ -111,13 +115,15 @@ def objectProperties(request):
     if request.method == 'POST':
 
         if 'Edit' in request.POST:
-            editedObjectProperty = request.POST.get('Edit')
-            newName = request.POST.get('objectPropertyEditNewName')
-            subject = request.POST.get('objectPropertyEditOne')
-            object = request.POST.get('objectPropertyEditTwo')
+            editedObjectProperty = Node(request.POST.get('Edit'))
+            newName = Node(request.POST.get('objectPropertyEditNewName'))
+
+            rename(editedObjectProperty, newName)
 
         if 'Delete' in request.POST:
-            delObjectProperty = request.POST.get('Delete')
+            delObjectProperty = Node(request.POST.get('Delete'))
+
+            delete(delObjectProperty)
 
     context = {
         'objectProperties': objectProperties,
