@@ -81,7 +81,9 @@ def delete(obj):
 
 
 def rename(obj, newObj):
-    return update('DELETE {')
+    update("DELETE { ?x ?r " + obj.__str__() + ". } INSERT { ?x ?r " + newObj.__str__() + ". } WHERE { ?x ?r " + obj.__str__() + ". }")
+    update("DELETE { " + obj.__str__() + " ?r ?x. } INSERT { " + newObj.__str__() + " ?r ?x. } WHERE { " + obj.__str__() + " ?r ?x. }")
+    update("DELETE { ?x " + obj.__str__() + "  ?y. } INSERT { ?x " + newObj.__str__() + "  ?y. } WHERE { ?x " + obj.__str__() + " ?y. }")
 
 # classA = Node(":classA")
 # classB = Node(":classB")
