@@ -13,53 +13,88 @@ Ontology
   c.classList.add('active')
 </script>
 
-
-<div class="btn-group">
-  <div class="btn-group">
-    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Add Class
-    </button>
-    <ul class="dropdown-menu">
-      <form method='post'>
+  <br/>
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Class
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add class</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="classInputName" name="classInputName"></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><button type="submit" class="dropdown-item" name="addClass">Add</button></li>
-      </form>
-    </ul>
+        <div class="modal-body">
+          <input placeholder="Enter name" class="form-control dropdown-item" type="text" id="classInputName" name="classInputName">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" name="addClass">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="btn-group">
-    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Add Instance
-    </button>
-    <ul class="dropdown-menu">
-      <form method='post'>
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+    Instance
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal1Label">Add instance</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="individualInputName" name="individualInputName"></li></br>
-        <li><input placeholder="Enter class" class="form-control dropdown-item" type="text" id="individualInput" name="individualInput"></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><button type="submit" class="dropdown-item" name="addInstance">Add</button></li>
-      </form>
-    </ul>
+        <div class="modal-body">
+          <input placeholder="Enter name" class="form-control dropdown-item" type="text" id="individualInputName" name="individualInputName"></br>
+          <input placeholder="Enter class" class="form-control dropdown-item" type="text" id="individualInput" name="individualInput">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" name="addInstance">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Add Object Property
-    </button>
-    <ul class="dropdown-menu">
-      <form method='post'>
+
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    Object Property
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal2Label">Add object property</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method='post'>
         {% csrf_token %}
-        <li><input placeholder="Enter name" class="form-control dropdown-item" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></li></br>
-        <li><input placeholder="Enter subject" class="form-control dropdown-item" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></li></br>
-        <li><input placeholder="Enter object" class="form-control dropdown-item" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo"></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><button type="submit" class="dropdown-item" name="addObjectProperty">Add</button></li>
-      </form>
-    </ul>
+        <div class="modal-body">
+          <input placeholder="Enter name" class="form-control dropdown-item" type="text" id="objectPropertyInputName" name="objectPropertyInputName"></br>
+          <input placeholder="Enter subject" class="form-control dropdown-item" type="text" id="objectPropertyInputOne" name="objectPropertyInputOne"></br>
+          <input placeholder="Enter object" class="form-control dropdown-item" type="text" id="objectPropertyInputTwo" name="objectPropertyInputTwo">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" name="addObjectProperty">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
 
 </br></br>
 
@@ -75,7 +110,7 @@ Ontology
     <div id="collapse{{ forloop.counter0 }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter0 }}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <div class="table-responsive">
-          <table class="table table-hover table-sm">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Super Classes</th>
@@ -89,7 +124,7 @@ Ontology
               {% endfor %}
             </tbody>
           </table>
-          <table class="table table-hover table-sm">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Subclasses</th>
@@ -103,7 +138,7 @@ Ontology
               {% endfor %}
             </tbody>
           </table>
-          <table class="table table-hover table-sm">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Instance</th>
@@ -123,26 +158,26 @@ Ontology
 
             <div class="input-group">
               <input placeholder="Enter super class" class="form-control" type="text" id="classInputOne" name="classInputOne"></br>
-              <button type="submit" class="btn btn-success float-end" name="addSuperClass" value="{{ el.0 }}">Add</button>
+              <button type="submit" class="btn btn-outline-success float-end" name="addSuperClass" value="{{ el.0 }}">Add</button>
             </div>
 
             </br>
 
             <div class="input-group">
               <input placeholder="Enter Subclass" class="form-control" type="text" id="classInputTwo" name="classInputTwo">
-              <button type="submit" class="btn btn-success float-end" name="addSubClass" value="{{ el.0 }}">Add</button>
+              <button type="submit" class="btn btn-outline-success float-end" name="addSubClass" value="{{ el.0 }}">Add</button>
             </div>
 
             </br>
 
             <div class="input-group">
               <input placeholder="Enter new name" class="form-control" type="text" id="classEditOne" name="newName">
-              <button type="submit" class="btn btn-warning float-end" name="Edit" value="{{ el.0 }}">Edit</button>
+              <button type="submit" class="btn btn-outline-warning float-end" name="Edit" value="{{ el.0 }}">Edit</button>
             </div>
             
             </br>
 
-            <button type="submit" class="btn btn-danger btn-sm float-end" name="Delete" value="{{ el.0 }}">Delete</button>
+            <button type="submit" class="btn btn-outline-danger btn-sm float-end" name="Delete" value="{{ el.0 }}">Delete</button>
 
           </form>
 
@@ -165,8 +200,8 @@ Ontology
     }
   </style>
 
-  <img src="https://media.tenor.com/ywIY7WlJRLwAAAAi/yes-please-sir-waiting.gif" alt="Yes Please Sir Waiting Sticker" width="173" height="173" />
-  <p style="text-align: center;">No classes. Please add some...</p>
+  <!-- <img src="https://media.tenor.com/ywIY7WlJRLwAAAAi/yes-please-sir-waiting.gif" alt="Yes Please Sir Waiting Sticker" width="173" height="173" /> -->
+  <p style="text-align: center;">There are no classes</p>
 {% endif %}
 
 {% endblock %}

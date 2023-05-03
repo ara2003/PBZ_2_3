@@ -26,7 +26,7 @@ Object Properties
 </style>
 
 <div class="table-responsive">
-    <table class="table table-hover table-sm">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Object Property</th>
@@ -37,20 +37,33 @@ Object Properties
         <tr>
           <td>{{ el }}</td>
           <td>
-            <div class="btn-group float-end">
-              <form method='post'>
-                {% csrf_token %}
-                <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Edit Property
-                </button>
-                <ul class="dropdown-menu">
-                  <li><input placeholder="Enter new name" class="form-control dropdown-item" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName"></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><button type="submit" class="dropdown-item" name="Edit" value="{{ el }}">Edit</button></li> 
-                </ul>
-                <button type="submit" class="btn btn-danger" name="Delete" value="{{ el }}">Delete</button>
-              </form>
+
+            <form method='post'>
+              {% csrf_token %}
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter0 }}">
+              Edit
+            </button>
+    
+            <div class="modal fade" id="exampleModal{{ forloop.counter0 }}" tabindex="-1" aria-labelledby="exampleModal{{ forloop.counter0 }}Label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal{{ forloop.counter0 }}Label">Edit Property</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <input placeholder="Enter new name" class="form-control dropdown-item" type="text" id="objectPropertyEditNewName" name="objectPropertyEditNewName">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" name="Edit" value="{{ el }}">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <button type="submit" class="btn btn-outline-danger" name="Delete" value="{{ el }}">Delete</button>
+            </form>
+            
           </td>
         </tr>
         {% endfor %}

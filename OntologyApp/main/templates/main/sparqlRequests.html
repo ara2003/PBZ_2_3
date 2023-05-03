@@ -12,10 +12,11 @@ SPARQL Requests
   c.classList.add('active')
 </script>
 
+<br />
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.body }}<br>
-    <button type="submit" class="btn btn-success" name="Submit">Request</button>
+    <button type="submit" class="btn btn-outline-success" name="Submit">Request</button>
     <span>{{ context.error }}</span>
 </form>
 
